@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import { StudyRecord } from '../../molecules/study/StudyRecord';
 
-export const StudyRecordsList = (props) => {
+export const StudyRecordsList = memo((props) => {
   const { records } = props;
   return (
     <div>
@@ -9,4 +10,4 @@ export const StudyRecordsList = (props) => {
       ))}
     </div>
   );
-};
+});

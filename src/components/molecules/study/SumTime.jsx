@@ -1,4 +1,6 @@
-export const SumTime = (props) => {
+import { memo } from 'react';
+
+export const SumTime = memo((props) => {
   const { records } = props;
   return (
     <p>
@@ -9,4 +11,4 @@ export const SumTime = (props) => {
       / 1000(h)
     </p>
   );
-};
+});
