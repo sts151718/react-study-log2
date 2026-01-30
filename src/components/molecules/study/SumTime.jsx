@@ -1,4 +1,4 @@
-export const StudySum = (props) => {
+export const SumTime = (props) => {
   const { records } = props;
   return (
     <p>
