@@ -9,7 +9,7 @@ export const StudyRecordsList = memo((props) => {
       {isLoading ? (
         <LoadingSvg />
       ) : (
-        records.map((rec) => <StudyRecord key={rec.title} title={rec.title} time={rec.time} />)
+        records.map((rec) => <StudyRecord key={rec.id} title={rec.title} time={rec.time} />)
       )}
     </div>
   );
