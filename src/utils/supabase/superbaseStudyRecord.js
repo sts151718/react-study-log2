@@ -2,11 +2,12 @@ import { supabase } from './supabase';
 
 /**
  * Supabaseから全データを取得
- * @returns {{id: uuid, title: string, time: number}} 取得されたデータ
+ *
+ * @returns {Object} 取得したデータとエラーオブジェクト
  */
 export const fetchAllStudyRecords = async () => {
-  const records = await supabase.from('study-record').select();
-  return records;
+  const { data, error } = await supabase.from('study-record').select();
+  return { data, error };
 };
 
 /**
@@ -15,9 +16,21 @@ export const fetchAllStudyRecords = async () => {
  * @param {string} record.title 学習内容
  * @param {number} record.time 学習時間
  *
- * @returns {Object} 追加されたレコード
+ * @returns {Object} 取得したデータとエラーオブジェクト
  */
 export const insertStudyRecord = async (inputRecord) => {
-  const insertRecord = await supabase.from('study-record').insert(inputRecord).select();
-  return insertRecord;
+  const { data, error } = await supabase.from('study-record').insert(inputRecord).select();
+  return { data, error };
+};
+
+/**
+ * 指定したidのレコードを削除
+ *
+ * @param {string} id uuid型のid
+ *
+ * @returns {Object} 取得したデータとエラーオブジェクト
+ */
+export const deleteStudyRecord = async (id) => {
+  const { data, error } = await supabase.from('study-record').delete().eq('id', id);
+  return { data, error };
 };

@@ -5,7 +5,7 @@ import { ErrorMessage } from '../atoms/paragraph/ErrorMessage';
 import { AppTitle } from '../atoms/title/AppTitle';
 import { StudyInputsArea } from '../organisms/study/StudyInputsArea';
 import { StudyRecordsList } from '../organisms/study/StudyRecordsList';
-import { fetchAllStudyRecords, insertStudyRecord } from '../../utils/supabase/superbaseStudyRecord';
+import { deleteStudyRecord, fetchAllStudyRecords, insertStudyRecord } from '../../utils/supabase/superbaseStudyRecord';
 
 export const Top = () => {
   const [records, setRecords] = useState([]);
@@ -58,6 +58,19 @@ export const Top = () => {
     setStudyTime(0);
   };
 
+  const onClickDeleteRecord = async (id) => {
+    const { error } = await deleteStudyRecord(id);
+
+    if (error) {
+      alert('データの削除に失敗しました。');
+      return;
+    }
+
+    const newRecords = records.filter((rec) => rec.id !== id);
+
+    setRecords(newRecords);
+  };
+
   return (
     <main>
       <AppTitle>学習記録一覧</AppTitle>
@@ -67,7 +80,7 @@ export const Top = () => {
         studyTime={studyTime}
         onChangeStudyTime={onChangeStudyTime}
       />
-      <StudyRecordsList records={records} isLoading={isLoading} />
+      <StudyRecordsList records={records} isLoading={isLoading} onClickDeleteRecord={onClickDeleteRecord} />
       <BaseButton onClick={onClickAdd}>登録</BaseButton>
       <SumTime records={records} />
       <ErrorMessage>{error}</ErrorMessage>

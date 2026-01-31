@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { BaseButton } from '../../atoms/button/BaseButton';
 
 export const StudyRecord = memo((props) => {
-  const { title, time } = props;
+  const { title, time, onClickDelete } = props;
   return (
     <SContainer>
       <span>
         {title} {time}時間
       </span>
-      <BaseButton>削除</BaseButton>
+      <BaseButton onClick={onClickDelete}>削除</BaseButton>
     </SContainer>
   );
 });
