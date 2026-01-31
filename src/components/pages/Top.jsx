@@ -5,7 +5,7 @@ import { ErrorMessage } from '../atoms/paragraph/ErrorMessage';
 import { AppTitle } from '../atoms/title/AppTitle';
 import { StudyInputsArea } from '../organisms/study/StudyInputsArea';
 import { StudyRecordsList } from '../organisms/study/StudyRecordsList';
-import { fetchAllStudyRecords } from '../../utils/supabase/studyRecord';
+import { fetchAllStudyRecords } from '../../utils/supabase/superbaseStudyRecord';
 
 export const Top = () => {
   const [records, setRecords] = useState([]);
