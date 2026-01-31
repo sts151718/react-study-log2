@@ -12,9 +12,11 @@ export const Top = () => {
   const [studyText, setStudyText] = useState('');
   const [studyTime, setStudyTime] = useState(0);
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchStudyRecords = async () => {
+      setIsLoading(true);
       const { data, error } = await fetchAllStudyRecords();
 
       if (error) {
@@ -23,6 +25,7 @@ export const Top = () => {
         return;
       }
       setRecords(data);
+      setIsLoading(false);
     };
     fetchStudyRecords();
   }, []);
@@ -57,7 +60,7 @@ export const Top = () => {
         studyTime={studyTime}
         onChangeStudyTime={onChangeStudyTime}
       />
-      <StudyRecordsList records={records} />
+      <StudyRecordsList records={records} isLoading={isLoading} />
       <BaseButton onClick={onClickAdd}>登録</BaseButton>
       <SumTime records={records} />
       <ErrorMessage>{error}</ErrorMessage>
