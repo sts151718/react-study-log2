@@ -1,17 +1,31 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SumTime } from '../molecules/study/SumTime';
 import { BaseButton } from '../atoms/button/BaseButton';
 import { ErrorMessage } from '../atoms/paragraph/ErrorMessage';
 import { AppTitle } from '../atoms/title/AppTitle';
-import { StudyRecord } from '../molecules/study/StudyRecord';
 import { StudyInputsArea } from '../organisms/study/StudyInputsArea';
 import { StudyRecordsList } from '../organisms/study/StudyRecordsList';
+import { fetchAllStudyRecords } from '../../utils/supabase/studyRecord';
 
 export const Top = () => {
   const [records, setRecords] = useState([]);
   const [studyText, setStudyText] = useState('');
   const [studyTime, setStudyTime] = useState(0);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchStudyRecords = async () => {
+      const { data, error } = await fetchAllStudyRecords();
+
+      if (error) {
+        alert('データの取得に失敗しました。');
+        console.error(error);
+        return;
+      }
+      setRecords(data);
+    };
+    fetchStudyRecords();
+  }, []);
 
   const onChangeStudyText = (e) => {
     setStudyText(e.target.value);
