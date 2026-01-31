@@ -5,7 +5,7 @@ import { ErrorMessage } from '../atoms/paragraph/ErrorMessage';
 import { AppTitle } from '../atoms/title/AppTitle';
 import { StudyInputsArea } from '../organisms/study/StudyInputsArea';
 import { StudyRecordsList } from '../organisms/study/StudyRecordsList';
-import { fetchAllStudyRecords } from '../../utils/supabase/superbaseStudyRecord';
+import { fetchAllStudyRecords, insertStudyRecord } from '../../utils/supabase/superbaseStudyRecord';
 
 export const Top = () => {
   const [records, setRecords] = useState([]);
@@ -27,6 +27,7 @@ export const Top = () => {
       setRecords(data);
       setIsLoading(false);
     };
+
     fetchStudyRecords();
   }, []);
 
@@ -38,14 +39,20 @@ export const Top = () => {
     setStudyTime(e.target.value);
   };
 
-  const onClickAdd = () => {
+  const onClickAdd = async () => {
     setError('');
     if (studyText === '' || studyTime === '') {
       setError('入力されていない項目があります。');
       return;
     }
 
-    const newRecords = [...records, { title: studyText, time: studyTime }];
+    const { data, error } = await insertStudyRecord({ title: studyText, time: studyTime });
+    if (error) {
+      alert('データの追加に失敗しました。');
+      return;
+    }
+
+    const newRecords = [...records, ...data];
     setRecords(newRecords);
     setStudyText('');
     setStudyTime(0);
