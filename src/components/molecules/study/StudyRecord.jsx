@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import { BaseButton } from '../../atoms/button/BaseButton';
+import { AlertButton } from '../../atoms/button/AlertButton';
 
 export const StudyRecord = memo((props) => {
   const { title, time, onClickDelete } = props;
@@ -9,7 +9,7 @@ export const StudyRecord = memo((props) => {
       <span>
         {title} {time}時間
       </span>
-      <BaseButton onClick={onClickDelete}>削除</BaseButton>
+      <AlertButton onClick={onClickDelete}>削除</AlertButton>
     </SContainer>
   );
 });

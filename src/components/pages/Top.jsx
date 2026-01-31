@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { SumTime } from '../molecules/study/SumTime';
-import { BaseButton } from '../atoms/button/BaseButton';
+import { PrimaryButton } from '../atoms/button/PrimaryButton';
 import { ErrorMessage } from '../atoms/paragraph/ErrorMessage';
 import { AppTitle } from '../atoms/title/AppTitle';
 import { StudyInputsArea } from '../organisms/study/StudyInputsArea';
@@ -81,7 +81,7 @@ export const Top = () => {
         onChangeStudyTime={onChangeStudyTime}
       />
       <StudyRecordsList records={records} isLoading={isLoading} onClickDeleteRecord={onClickDeleteRecord} />
-      <BaseButton onClick={onClickAdd}>登録</BaseButton>
+      <PrimaryButton onClick={onClickAdd}>登録</PrimaryButton>
       <SumTime records={records} />
       <ErrorMessage>{error}</ErrorMessage>
     </main>
