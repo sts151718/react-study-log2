@@ -16,10 +16,11 @@ jobs:
         run: npm ci
       - name: setup supabase env
         run: |
-          echo "VITE_SUPABASE_URL=${{secrets.VITE_SUPABSE_URL}}" >> ./.env
-          echo "VITE_SUPABASE_PROJECT_KEY=${{secrets.VITE_SUPABASE_PROJECT_KEY}}" >> ./.env
       - name: app build
         run: npm run build
+        env:
+          VITE_SUPABASE_URL: ${{secrets.VITE_SUPABSE_URL}}
+          VITE_SUPABASE_PROJECT_KEY: ${{secrets.VITE_SUPABASE_PROJECT_KEY}}
 
   deploy:
     runs-on: ubuntu-latest
