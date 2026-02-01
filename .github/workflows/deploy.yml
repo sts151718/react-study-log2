@@ -49,14 +49,12 @@ jobs:
         uses: actions/download-artifact@v6
         with:
           name: dist-artifact
-      - name: confirm list after download artifact
+          path: dist
+      - name: deploy to firebase hosting
         run: |
-          ls ./
-      # - name: deploy to firebase hosting
-      #   run: |
-      #     ./node_modules/.bin/firebase deploy
-      #   env:
-      #     FIREBASE_CLI_EXPERIMENTS: webframeworks
-      # - name: delete GOOGLE_APPLICATION_CREDENTIALS
-      #   run: rm $GOOGLE_APPLICATION_CREDENTIALS
-      #   if: ${{ always() }}
+          ./node_modules/.bin/firebase deploy
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworks
+      - name: delete GOOGLE_APPLICATION_CREDENTIALS
+        run: rm $GOOGLE_APPLICATION_CREDENTIALS
+        if: ${{ always() }}
