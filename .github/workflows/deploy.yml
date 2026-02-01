@@ -31,22 +31,23 @@ jobs:
         with:
           node-version: '25.4.0'
           cache: 'npm'
-      - name: install packages
-        run: npm ci
-      - name: install firebase cli
-        run: npm install --save-dev firebase-tools
-      - name: decode firebase service account key to authenticate
+      - name: confirm directory
         run: |
-          echo "${{secrets.FIREBASE_KEY}}" | base64 -d > ./firebase-key.json
-          echo "GOOGLE_APPLICATION_CREDENTIALS=${{github.workspace}}/firebase-key.json" >> $GITHUB_ENV
-      - name: select active space
-        run: |
-          ./node_modules/.bin/firebase use ${{secrets.FIREBASE_PROJECT_ID}}
-      - name: deploy to firebase hosting
-        run: |
-          ./node_modules/.bin/firebase deploy
-        env:
-          FIREBASE_CLI_EXPERIMENTS: webframeworks
-      - name: delete GOOGLE_APPLICATION_CREDENTIALS
-        run: rm $GOOGLE_APPLICATION_CREDENTIALS
-        if: ${{ always() }}
+          ls ./
+      # - name: install firebase cli
+      #   run: npm install --save-dev firebase-tools
+      # - name: decode firebase service account key to authenticate
+      #   run: |
+      #     echo "${{secrets.FIREBASE_KEY}}" | base64 -d > ./firebase-key.json
+      #     echo "GOOGLE_APPLICATION_CREDENTIALS=${{github.workspace}}/firebase-key.json" >> $GITHUB_ENV
+      # - name: select active space
+      #   run: |
+      #     ./node_modules/.bin/firebase use ${{secrets.FIREBASE_PROJECT_ID}}
+      # - name: deploy to firebase hosting
+      #   run: |
+      #     ./node_modules/.bin/firebase deploy
+      #   env:
+      #     FIREBASE_CLI_EXPERIMENTS: webframeworks
+      # - name: delete GOOGLE_APPLICATION_CREDENTIALS
+      #   run: rm $GOOGLE_APPLICATION_CREDENTIALS
+      #   if: ${{ always() }}
