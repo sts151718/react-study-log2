@@ -14,12 +14,10 @@ jobs:
           node-version: '25.4.0'
       - name: install packages
         run: npm ci
-      - name: setup supabase env
-        run: |
       - name: app build
         run: npm run build
         env:
-          VITE_SUPABASE_URL: ${{secrets.VITE_SUPABSE_URL}}
+          VITE_SUPABASE_URL: ${{secrets.VITE_SUPABASE_URL}}
           VITE_SUPABASE_PROJECT_KEY: ${{secrets.VITE_SUPABASE_PROJECT_KEY}}
 
   deploy:
