@@ -1,4 +1,5 @@
 name: firebase deploy
+run-name: ${{github.workflow}} - ${{github.event.head_commit.message || github.event.pull_request.title}}
 
 on:
   push:
