@@ -15,10 +15,10 @@ jobs:
       - name: install packages
         run: npm ci
       - name: app build
-        run: npm run build
         env:
           VITE_SUPABASE_URL: ${{secrets.VITE_SUPABASE_URL}}
           VITE_SUPABASE_PROJECT_KEY: ${{secrets.VITE_SUPABASE_PROJECT_KEY}}
+        run: npm run build
 
   deploy:
     runs-on: ubuntu-latest
