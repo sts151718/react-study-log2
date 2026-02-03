@@ -17,16 +17,14 @@ export const Top = () => {
   useEffect(() => {
     const fetchStudyRecords = async () => {
       setIsLoading(true);
-      const { data, error } = await fetchAllStudyRecords();
-
-      if (error) {
+      try {
+        const records = await fetchAllStudyRecords();
+        setRecords(records);
+        setIsLoading(false);
+      } catch (error) {
         alert('データの取得に失敗しました。');
         console.error(error);
-        return;
       }
-
-      setRecords(data);
-      setIsLoading(false);
     };
 
     fetchStudyRecords();
@@ -47,29 +45,28 @@ export const Top = () => {
       return;
     }
 
-    const { data, error } = await insertStudyRecord({ title: studyText, time: studyTime });
-    if (error) {
-      alert('データの追加に失敗しました。');
-      return;
-    }
+    try {
+      const record = await insertStudyRecord({ title: studyText, time: studyTime });
 
-    const newRecords = [...records, ...data];
-    setRecords(newRecords);
-    setStudyText('');
-    setStudyTime(0);
+      const newRecords = [...records, record];
+      setRecords(newRecords);
+      setStudyText('');
+      setStudyTime(0);
+    } catch (error) {
+      alert('データの追加に失敗しました。');
+      console.error(error);
+    }
   };
 
   const onClickDeleteRecord = async (id) => {
-    const { error } = await deleteStudyRecord(id);
+    try {
+      await deleteStudyRecord(id);
+      const newRecords = records.filter((rec) => rec.id !== id);
 
-    if (error) {
+      setRecords(newRecords);
+    } catch (error) {
       alert('データの削除に失敗しました。');
-      return;
     }
-
-    const newRecords = records.filter((rec) => rec.id !== id);
-
-    setRecords(newRecords);
   };
 
   return (
