@@ -5,7 +5,7 @@ import { ErrorMessage } from '../atoms/paragraph/ErrorMessage';
 import { AppTitle } from '../atoms/title/AppTitle';
 import { StudyInputsArea } from '../organisms/study/StudyInputsArea';
 import { StudyRecordsList } from '../organisms/study/StudyRecordsList';
-import { deleteStudyRecord, fetchAllStudyRecords, insertStudyRecord } from '../../utils/supabase/superbaseStudyRecord';
+import { deleteStudyRecord, fetchAllStudyRecords, insertStudyRecord } from '../../utils/supabase/supabaseStudyRecord';
 
 export const Top = () => {
   const [records, setRecords] = useState([]);
@@ -24,6 +24,7 @@ export const Top = () => {
         console.error(error);
         return;
       }
+
       setRecords(data);
       setIsLoading(false);
     };

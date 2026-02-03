@@ -5,17 +5,19 @@ import { AlertButton } from '../../atoms/button/AlertButton';
 export const StudyRecord = memo((props) => {
   const { title, time, onClickDelete } = props;
   return (
-    <SContainer>
+    <SItem>
       <span>
         {title} {time}時間
       </span>
       <AlertButton onClick={onClickDelete}>削除</AlertButton>
-    </SContainer>
+    </SItem>
   );
 });
 
-const SContainer = styled.div`
+const SItem = styled.li`
+  text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
+  margin-bottom: 10px;
 `;
