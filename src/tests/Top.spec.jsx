@@ -45,7 +45,8 @@ describe('トップページ テスト', () => {
     render(<Top />);
     const appTitle = await screen.findByRole('heading', { level: 1 });
     expect(appTitle).toBeVisible();
-    expect(appTitle).toHaveTextContent('学習記録一覧');
+    // expect(appTitle).toHaveTextContent('学習記録一覧');
+    expect(appTitle).toHaveTextContent('存在しないタイトル');
   });
 
   it('登録ボタンを押したら、入力内容が記録に追加されていること', async () => {
