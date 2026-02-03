@@ -7,7 +7,10 @@ import { supabase } from './supabase';
  */
 export const fetchAllStudyRecords = async () => {
   const { data, error } = await supabase.from('study-record').select();
-  return { data, error };
+  if (error) {
+    throw new Error('Supabase Fetch Error');
+  }
+  return data;
 };
 
 /**
@@ -20,7 +23,10 @@ export const fetchAllStudyRecords = async () => {
  */
 export const insertStudyRecord = async (inputRecord) => {
   const { data, error } = await supabase.from('study-record').insert(inputRecord).select();
-  return { data, error };
+  if (error) {
+    throw new Error('Supabase Insert Error');
+  }
+  return data[0];
 };
 
 /**
@@ -32,5 +38,8 @@ export const insertStudyRecord = async (inputRecord) => {
  */
 export const deleteStudyRecord = async (id) => {
   const { data, error } = await supabase.from('study-record').delete().eq('id', id);
-  return { data, error };
+  if (error) {
+    throw new Error('Supabase Delete Error');
+  }
+  return data;
 };

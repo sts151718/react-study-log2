@@ -7,18 +7,11 @@ import { Top } from '../components/pages/Top';
 
 const mockRecordsInfo = { id: 0, data: [] };
 jest.mock('../utils/supabase/supabaseStudyRecord', () => ({
-  fetchAllStudyRecords: jest.fn(
-    () => new Promise((resolve) => setTimeout(() => resolve({ data: mockRecordsInfo.data, error: null }), 500))
-  ),
+  fetchAllStudyRecords: jest.fn(() => new Promise((resolve) => setTimeout(() => resolve(mockRecordsInfo.data), 200))),
   insertStudyRecord: jest.fn(
-    (obj) =>
-      new Promise((resolve) =>
-        setTimeout(() => resolve({ data: [{ id: ++mockRecordsInfo.id, ...obj }], error: null }), 500)
-      )
+    (obj) => new Promise((resolve) => setTimeout(() => resolve({ id: ++mockRecordsInfo.id, ...obj }), 200))
   ),
-  deleteStudyRecord: jest.fn(
-    () => new Promise((resolve) => setTimeout(() => resolve({ data: null, error: null }), 500))
-  ),
+  deleteStudyRecord: jest.fn(() => new Promise((resolve) => setTimeout(() => resolve(null), 200))),
 }));
 
 function setRecordsInfo(records) {
