@@ -1,9 +1,9 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { render, screen, waitFor, waitForElementToBeRemoved, within } from '@testing-library/react';
+import { render, screen, waitForElementToBeRemoved, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect, jest } from '@jest/globals';
-import { debug } from 'jest-preview';
+import { Top } from '../components/pages/Top';
 
 const mockRecordsInfo = { id: 0, data: [] };
 jest.mock('../utils/supabase/supabaseStudyRecord', () => ({
@@ -21,8 +21,6 @@ jest.mock('../utils/supabase/supabaseStudyRecord', () => ({
   ),
 }));
 
-import { Top } from '../components/pages/Top';
-
 function setRecordsInfo(records) {
   mockRecordsInfo.data = records.map((rec) => ({ id: ++mockRecordsInfo.id, ...rec }));
 }
@@ -33,7 +31,7 @@ function clearRecordsInfo() {
 }
 
 describe('トップページ テスト', () => {
-  beforeEach(async () => {
+  beforeEach(() => {
     // alertのモックを作成
     jest.spyOn(globalThis, 'alert').mockImplementation(() => {});
   });
@@ -42,6 +40,7 @@ describe('トップページ テスト', () => {
     jest.clearAllMocks();
     clearRecordsInfo();
   });
+
   it('タイトルが表示されていること', async () => {
     render(<Top />);
     const appTitle = await screen.findByRole('heading', { level: 1 });
