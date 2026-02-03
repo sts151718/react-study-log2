@@ -1,16 +1,59 @@
-# React + Vite
+# Study Log
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+JISOUの課題で、学習時間を記録するアプリケーションを作成しました。
+学習時間の合計を自動計算しており、可視化しております。
 
-Currently, two official plugins are available:
+# 環境設定
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. このリポジトリをクローンしてください。
 
-## React Compiler
+   ```
+   git@github.com:sts151718/react-study-log2.git
+   ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. 依存関係のインストールをしてください。
 
-## Expanding the ESLint configuration
+   ```
+   npm ci
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+3. `.env.sample`から`.env`ファイルを作成してください。
+
+4. Supabase(https://supabase.com/)でテーブル・レコードを作成してください。
+   1. study-recordという名前でプロジェクト名を作成してください。
+   2. study-recordという名前のテーブルを作成し、以下のカラムを作成してください。
+   3. プロジェクトURLとプロジェクトキーを`.env`内のVITE_SUPABASE_URLとVITE_SUPABASE_PROJECT_KEY変数にコピー&ペーストしてください。
+
+# 起動方法
+
+```
+npm run dev
+```
+
+http://localhost:5174/ をURLバーに入力するか、ターミナルでURLをCtrl(Command (⌘) ) + クリックすると、開くことができます。
+
+# ホスティング
+
+[Firebase](https://firebase.google.com/?hl=ja)のプロジェクトを作成して、ホスティングしてください。
+
+1. Firebaseにプロジェクトとアプリを作成してください。 その際に、Firebase CLIをインストールする必要があります。
+
+   ```
+    npm install -g firebase-tools
+   ```
+
+2. Firebase CLIでログインして、デプロイしてください。
+   ```
+    firebase login
+    make deploy
+   ```
+
+# テーブル
+
+## study_record
+
+| カラム名 | 型      | option   |
+| -------- | ------- | -------- |
+| id       | uuid    |          |
+| title    | varchar | non null |
+| time     | int4    | non null |
